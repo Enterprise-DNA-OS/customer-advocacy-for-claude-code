@@ -1,11 +1,56 @@
 [
   {
-    "name": "example",
-    "title": "TODO(author): the first document this industry must produce",
-    "for_each": "select gen_random_uuid() as id, 'Example' as name",
+    "name": "reference-brief",
+    "title": "Draft internal reference brief",
+    "for_each": "select id,code from requests where status='open'",
+    "file": "code",
+    "sections": [
+      {
+        "title": "Request",
+        "sql": "select code,prospect,kind,industry,product,region,due_date,owner,brief from requests where id=$1"
+      },
+      {
+        "title": "Assignment and current permission",
+        "note": "Internal only. Read restrictions and confirm the advocate accepted this audience before sharing. An empty assignment means nobody has been chosen.",
+        "sql": "select a.name,a.company,x.status,p.decision,p.valid_until,p.restrictions from assignments x join advocates a on a.id=x.advocate_id join requests r on r.id=x.request_id left join current_permissions p on p.advocate_id=a.id and p.kind=r.kind where x.request_id=$1 and x.status in ('proposed','accepted')"
+      },
+      {
+        "title": "Current exceptions",
+        "sql": "select c.record,c.rule,c.finding from compliance_findings c where c.record_id in (select id from assignments where request_id=$1) or c.record_id in (select advocate_id from assignments where request_id=$1)"
+      }
+    ]
+  },
+  {
+    "name": "permission-review",
+    "title": "Draft permission review sheet",
+    "for_each": "select id,name from advocates where status<>'archived'",
     "file": "name",
     "sections": [
-      { "title": "Details", "sql": "select 'replace me' as item, $1::text as record_id" }
+      {
+        "title": "Profile",
+        "sql": "select name,company,owner,verified_on,retention_review,status from advocates where id=$1"
+      },
+      {
+        "title": "Permission record",
+        "sql": "select kind,decision,valid_until,evidence,restrictions,actor from current_permissions where advocate_id=$1 order by kind"
+      },
+      {
+        "title": "Checks",
+        "sql": "select rule,finding from compliance_findings where record_id=$1"
+      }
+    ]
+  },
+  {
+    "name": "story-pack",
+    "title": "Draft approved wording pack",
+    "for_each": "select id,title from story_library where usable",
+    "file": "title",
+    "sections": [
+      {
+        "title": "Approved wording",
+        "note": "Internal draft. Recheck current permissions before publication. No content is published by this tool.",
+        "sql": "select title,name,company,body,valid_until,restrictions from story_library where id=$1 and usable"
+      }
     ]
   }
 ]

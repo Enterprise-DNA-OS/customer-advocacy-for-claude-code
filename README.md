@@ -1,115 +1,118 @@
-<h1 align="center">Customer Advocacy for Claude Code</h1>
+# Customer Advocacy for Claude Code
 
-<p align="center">
-  <strong>The open-source customer advocacy desk that is just a database and Claude Code.</strong>
-</p>
+Your reference requests, advocate workload and approved customer stories in a database you own. Free MIT code from Enterprise DNA. Works with Claude Code, Codex, OpenCode or Cursor.
 
-<p align="center">
-  Created by <a href="https://www.enterprisedna.co"><strong>Enterprise DNA</strong></a>. Free and open source. Works with Claude Code, Codex, OpenCode or Cursor.
-</p>
+| Do it yourself | We customise it | We run it for you |
+|---|---|---|
+| Free code. Install and run the demo. Hosting and coding-agent costs are yours. | Your advocate fields, permission rules, import mapping and screens. [Get your version built](https://enterprisedna.co/omni/book?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=influitive). | Installed and operated through Omni by Enterprise DNA. One setup fee, then a retainer. [Book a call](https://enterprisedna.co/omni/book?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=influitive). |
 
-<!-- three-doors -->
-<table align="center">
-  <tr>
-    <td align="center"><strong>Do it yourself</strong><br/>Clone it, run it, own it. Free, MIT.<br/><a href="#quick-start">Quick start</a></td>
-    <td align="center"><strong>We customise it</strong><br/>Your fields, your rules, your Influitive data brought across.<br/><a href="https://enterprisedna.co/omni/book/?utm_source=github&utm_medium=readme&utm_campaign=influitive">Book a call</a></td>
-    <td align="center"><strong>We run it for you</strong><br/>Installed, connected and operated inside Omni. Setup fee, then a retainer.<br/><a href="https://enterprisedna.co/omni/instead-of/influitive?utm_source=github&utm_medium=readme&utm_campaign=influitive">How it works</a></td>
-  </tr>
-</table>
+## A reference desk your team owns
 
-<p align="center">
-  <a href="#what-is-this">What is this</a> &bull;
-  <a href="#why-no-front-end">Why no front end</a> &bull;
-  <a href="#quick-start">Quick start</a> &bull;
-  <a href="#the-commands">Commands</a> &bull;
-  <a href="#instead-of-influitive">Instead of Influitive</a> &bull;
-  <a href="#want-it-installed-and-run-for-you">Installed for you</a> &bull;
-  <a href="#license">License</a>
-</p>
+Find a customer who fits the next reference request, check their permission and capacity, record their response, prepare an internal brief, and review the week. Keep exact story wording separate from permission to use it. Expired or withdrawn permission withholds a story from new draft packs.
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Node-20+-339933?style=flat-square" alt="Node 20+" />
-  <img src="https://img.shields.io/badge/PostgreSQL-any-336791?style=flat-square" alt="PostgreSQL" />
-  <img src="https://img.shields.io/badge/PGlite-embedded-3ecf8e?style=flat-square" alt="PGlite" />
-  <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square" alt="MIT License" />
-</p>
-
----
-
-## What is this
-
-Customer Advocacy for Claude Code does the job you pay Influitive for, as a Postgres database and a set of agent commands. There is no web front end. You open the folder in [Claude Code](https://claude.com/claude-code) (or Codex, OpenCode, Cursor: see `AGENTS.md`) and ask for what you want in plain language. It runs the right query, and it can answer questions the Influitive dashboard cannot.
-
-<!-- TODO(author): the annual bill. One sentence: what a 10 to 50 person business typically pays Influitive per year, all in, with a source. -->
-
-Want the same thing with a web front end, or built on a different stack? That is a customisation, and it is exactly what Enterprise DNA does: [book a call](https://enterprisedna.co/omni/book/?utm_source=github&utm_medium=readme&utm_campaign=influitive).
-
-<!-- TODO(author): two or three sentences on what this specific product covers and who it is for. -->
-
-## Why no front end
-
-- The front end was only ever there because the database was hard to talk to. That is no longer true.
-- Your data sits in plain Postgres tables you own. Any tool can read them. No export, no lock-in.
-- No seats, no tiers, no add-ons. Read [docs/why-no-front-end.md](docs/why-no-front-end.md) for the honest trade-offs too.
+This is a focused customer advocacy desk. It is independent of Influitive and does not reproduce the whole community platform. [Influitive's pricing page](https://influitive.com/pricing/) directs buyers to sales; no public price was listed when checked on 22 October 2026. Compare your actual contract with the workflows you need. See [why no front end](docs/why-no-front-end.md).
 
 ## Quick start
 
-Sixty seconds, no database install (an embedded Postgres runs inside Node):
+Node 20 or newer. No local database server required.
 
 ```bash
 git clone https://github.com/Enterprise-DNA-OS/customer-advocacy-for-claude-code.git
 cd customer-advocacy-for-claude-code
 npm install
+npm test
 npm run demo
 ```
 
-Then open the folder in Claude Code and type a slash command. <!-- TODO(author): name the first command to try. -->
+The demo forces a separate local database under .data/demo and outputs under .data/demo-output. All names and organisations are fictional. It includes an overdue request, a busy advocate, a stale profile and an approved story whose permission expired. The demo does not touch DATABASE_URL.
 
-### Use it with your own Postgres or Supabase
+For real records choose a fresh DATA_DIR or a controlled PostgreSQL connection, run npm run migrate, then import without seeding. [CLI reference](docs/cli.md) includes Bash and PowerShell examples.
 
-Copy `.env.example` to `.env`, set `DATABASE_URL`, then `npm run migrate`. Same commands, shared data, no per-seat fee.
+## Commands
 
-## The commands
-
-<!-- TODO(author): a table of the slash commands in .claude/commands and what each one does. -->
-
-| Command | What it does |
+| Command | Result |
 |---|---|
-| `/...` | ... |
+| `/advocates` | List advocate profiles and owners. |
+| `/advocate` | Read one advocate, permission history, activity and assignments. |
+| `/reference-desk` | Review open, overdue and fulfilled reference requests. |
+| `/request` | Read one request and all its assignments. |
+| `/match-reference` | Check industry, product, region, permission, workload and cooldown before choosing an advocate. |
+| `/advocate-load` | Review reserved work, recent completions and agreed capacity. |
+| `/permission-review` | Review the latest permission decision, restrictions and expiry by purpose. |
+| `/story-library` | Find approved wording and stories withheld by current record checks. |
+| `/attention` | Find overdue requests, full workloads, quiet advocates and record checks. |
+| `/compliance` | Check privacy-related record exceptions. Read docs/compliance.md before interpreting findings. |
+| `/dashboard` | Count open requests, usable stories and records needing review. |
+| `/insights` | Run ten cross-record questions with actual results. |
+| `/activity` | Read the local mutation history and operator labels. |
+| `/add` | Create a paused advocate profile from supplied facts. |
+| `/review-advocate` | Record a completed profile and historical-workload review. |
+| `/permission` | Record a real permission grant or withdrawal for one purpose. |
+| `/add-request` | Record a reference, story or speaker request with its audience and owner. |
+| `/close-request` | Cancel an open request and release its reserved workload. |
+| `/propose` | Reserve an eligible advocate after a human reviews the request and permission restrictions. |
+| `/record-response` | Record acceptance, decline, cancellation or completed participation from evidence. |
+| `/add-story` | Create a story draft from supplied wording and its source. |
+| `/story-decision` | Record approval of exact wording or withdraw a story from use. |
+| `/log` | Record an actual advocate conversation or activity. |
+| `/weekly-review` | Draft the Monday advocacy review from dashboard, attention and compliance. |
+| `/draft-reference` | Draft an internal brief for a reference request. |
+| `/draft-story` | Draft a story from approved wording and current permission. |
+| `/import` | Import the documented Influitive activity-feed export. |
+| `/export` | Export all domain records and original imports to a new private directory. |
+| `/view` | Render branded read-only weekly, workload and record-check views. |
+| `/documents` | Render internal reference briefs, permission review sheets and story wording packs. |
+| `/customise` | Add fields or change rules through a new migration and verified commands. |
+| `/new-view` | Add a branded read-only answer to an operator question. |
 
-## Instead of influitive
+## Ten questions across your records
 
-<!-- TODO(author): how to bring data across from Influitive; link docs/replace-influitive.md -->
+1. Which overdue requests still have no advocate?
+2. Which advocates have reached their agreed capacity?
+3. Which open assignments lost valid permission or a current profile?
+4. Which approved stories must be withheld today?
+5. Which active advocates have gone quiet for a month?
+6. Where do open requests lack any matching active profile?
+7. Which permissions expire in the next thirty days?
+8. Which imported advocates still await profile review?
+9. Which owners carry the largest unfulfilled request queue?
+10. Which companies supplied completed references in the last thirty days?
 
-## Architecture
+The insights command answers each with current records. These cross-record answers are included here; this is not a claim that a configured Influitive report can never answer the same question.
 
+## Your first hour: ten things to ask for
+
+1. Show the reference desk and overdue requests.
+2. Find candidates for REF-101 and explain every blocked match.
+3. Show Ben's workload and cooldown.
+4. Read Aroha's full profile and permission history.
+5. Which story is withheld and why?
+6. Draft the Monday review with owners for each exception.
+7. Render the internal reference briefs in our brand.
+8. Preview my activity export before importing it.
+9. Add our customer segment field and include it in matching.
+10. Add a read-only view of requests by owner and product.
+
+## Import once, keep the evidence
+
+```bash
+node scripts/advocacy.mjs import influitive --file="examples/influitive-activity.csv" --dry-run --actor="Advocacy coordinator"
 ```
-customer-advocacy-for-claude-code/
-  CLAUDE.md                 how the operator wants this run (routing table + house rules)
-  AGENTS.md                 the same, for Codex / OpenCode / Cursor / Gemini CLI
-  .claude/commands/         the slash commands
-  scripts/                  the CLI the commands drive
-  scripts/lib/db.mjs        one adapter: DATABASE_URL (pg) or embedded PGlite
-  supabase/migrations/      plain SQL schema
-  supabase/seed.sql         demo data
-  docs/                     the thesis and the migration guide
-```
 
-## Built for coding agents
+The importer supports the documented activity-feed CSV. It preserves original rows and the source file, validates the whole batch and skips repeat imports. Changed source history stops for reconciliation. Imported profiles start paused with no assumed permission. Review historical workload and classify profiles before activation. Community content, media and separate approval records need their own archive and mapping. [Switching guide](docs/replace-influitive.md).
 
-The database, CLI and command recipes work with Claude Code, Codex, OpenCode or Cursor. Ask your coding agent for a new command and have it implement and test the change against the same records.
+## Documents, views and privacy checks
 
-## Contributing
+npm run docs renders internal reference briefs, permission review sheets and usable story wording packs. npm run view renders weekly work, advocate workload and record checks. Set business name, logo and colours in brand.json. The HTML has no action buttons or server. Every document is a draft. Rerender before use because old files do not change when permission is withdrawn.
 
-Issues and pull requests are welcome. Keep the shape: plain SQL, a small CLI, a slash command per recurring job, no front end.
+[Compliance notes](docs/compliance.md) cite NZ privacy principles and Australian guidance. They explain what is checked, where a person must decide and which time periods are internal policies. No record check certifies compliance. Free-text audience restrictions require human review. The CLI never sends a message, publishes a story or pays a reward.
 
-## Want it installed and run for you?
+## Storage and verification
 
-Enterprise DNA installs Customer Advocacy for Claude Code for your business, migrates your Influitive data, connects it to the rest of your tools, and runs it for you as part of **Omni**, our managed Command Center. One setup fee, then a monthly retainer.
+Eight domain record types use UUIDs, foreign keys, uniqueness constraints and timestamp triggers. Plain PostgreSQL migrations also run on PGlite. The CLI records operator labels and mutation history; these are not authentication or tamper-proof signatures. Public database roles receive no table or view grants. A team deployment needs identity, least privilege, backup and a tested restore. Exports contain all domain records and original CSV text; protect them as personal information.
 
-- Book a call: [enterprisedna.co/omni/book](https://enterprisedna.co/omni/book/?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=influitive)
-- Read more: [enterprisedna.co/omni/instead-of/influitive](https://enterprisedna.co/omni/instead-of/influitive?utm_source=github&utm_medium=readme&utm_campaign=influitive)
+npm test isolates its database and generated output. It verifies workflows, permission withdrawal, capacity and cooldown, approval transitions, transactional imports, rollback, source preservation, ambiguity, JSON errors, exports, drafts and escaped HTML. CI is configured for Node 20 and 22 on Linux and Windows; consult the actual Actions run for platform results.
 
-## License
+## Licence
 
-MIT. Copyright (c) 2026 Enterprise DNA.
+MIT. Copyright (c) 2026 Enterprise DNA. Influitive is its owner's trademark. This independent project is not affiliated with or endorsed by Influitive.

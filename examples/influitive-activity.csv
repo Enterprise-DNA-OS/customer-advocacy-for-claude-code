@@ -1,0 +1,4 @@
+Event ID,Event Date,Event Type,Related Object,Contact ID,Email,Name,Company,Contact Type,Salesforce ID,Points
+EV-100,2026-01-10,Completed Challenge,Welcome interview,C-100,nia@example.test,Nia Cole,North Quay Software,Advocate,SF-100,10
+EV-101,2026-01-12,Reference Call,Planning reference,C-100,nia@example.test,Nia Cole,North Quay Software,Advocate,SF-100,20
+EV-102,2026-01-14,Completed Challenge,Product feedback,C-101,otto@example.test,Otto Vale,Silver Fern Systems,Advocate,SF-101,5

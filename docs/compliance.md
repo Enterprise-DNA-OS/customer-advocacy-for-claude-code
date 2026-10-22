@@ -1,0 +1,21 @@
+# Privacy and advocacy record checks
+
+Checked 22 October 2026. The desk checks evidence in records. It does not determine legal applicability, validate a signature or certify compliance. Keep the organisation's privacy officer responsible for lawful use and disclosure. Customers' employer approvals and brand usage permissions also need review.
+
+| Rule | Source and implemented behaviour |
+|---|---|
+| PROFILE_REVIEW | [NZ Privacy Principle 8](https://www.privacy.org.nz/privacy-principles/8/) concerns reasonable accuracy checks before use or disclosure. The desk blocks matching without a recorded profile review in the last 90 days. Ninety days is our editable local policy, not a legal deadline. |
+| RETENTION_REVIEW | [NZ Privacy Principle 9](https://www.privacy.org.nz/privacy-principles/9/) limits unnecessary retention. A missing or elapsed review date blocks matching and appears in compliance. Review dates are chosen by the operator; the law does not specify our period. No record is automatically deleted. |
+| PERMISSION_REVIEW | [NZ Privacy Principle 10](https://www.privacy.org.nz/privacy-principles/10/) addresses permitted use. [Principle 11](https://www.privacy.org.nz/privacy-principles/11/) addresses disclosure. The software adopts a conservative policy requiring a recorded grant for the requested purpose, unexpired through the later of today and the request date. These principles include lawful exceptions; the software does not decide whether an exception applies. |
+| ASSIGNMENT_RECHECK | Open assignments are flagged when current profile or purpose permission checks fail. Acceptance and completion recheck them. Permission restrictions remain text a human must interpret, including the intended audience, geography and exact use. A valid date is not permission for every prospect. |
+| STORY_WITHHELD | An approved story disappears from draft packs when its advocate is paused, review is stale, retention review is overdue or story permission is withdrawn/expired. Wording approval is a separate recorded decision. A new draft is never publication approval. |
+
+For Australian organisations subject to the Australian Privacy Principles, [OAIC APP 6 guidance](https://www.oaic.gov.au/privacy/australian-privacy-principles/australian-privacy-principles-guidelines/chapter-6-app-6-use-or-disclosure-of-personal-information) explains primary purpose and exceptions for secondary use/disclosure. [APP 11 guidance](https://www.oaic.gov.au/privacy/australian-privacy-principles/australian-privacy-principles-guidelines/chapter-11-app-11-security-of-personal-information) addresses security and destruction or de-identification when information is no longer needed, subject to exceptions. Confirm applicability and retention obligations with the organisation's adviser. These links inform the record checks; they are not a complete implementation of Australian privacy law.
+
+## Operating controls
+
+Imported activity never creates consent, acceptance or story approval. Profiles start paused. Review the historic events before activation: generic imported event types and points do not become reference workload. Capacity includes all proposed/accepted assignments and completed assignments in the last thirty days. Cooldown starts at the last completion and blocks a new proposal until it ends; it is deliberately conservative even for future requests.
+
+The CLI locks records during reservation and transition checks. SQL constraints prevent a second live assignment to a request. Actor labels and audit events establish local provenance, not authenticated or tamper-proof signatures. A database owner can change records directly. Identity, least privilege, encrypted storage, backup, restoration and retention disposal belong in a real deployment. Public database roles have no table or view grants.
+
+Exports, original imported files, audit details and generated documents can contain personal information. Protect every copy. Plan authorised disposal across them and backups; the CLI offers no automatic deletion. It never sends messages, publishes stories or pays rewards. Marketing email, advertising endorsements and reward programmes need their own applicable rules and controls before any integration is enabled.

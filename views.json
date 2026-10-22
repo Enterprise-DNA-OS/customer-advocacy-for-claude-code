@@ -1,13 +1,45 @@
 [
   {
     "name": "week",
-    "title": "This week",
-    "subtitle": "Customer Advocacy for Claude Code: what needs attention, rendered by npm run view",
+    "title": "Weekly customer advocacy desk",
+    "subtitle": "Internal records. Nothing sends from this view.",
     "sections": [
       {
+        "title": "Reference queue",
+        "sql": "select code,prospect,kind,due_date,owner,status,advocate,assignment_status from request_queue order by due_date"
+      },
+      {
         "title": "Needs attention",
-        "note": "TODO(author): point this at the industry's attention view (overdue, stuck, quiet).",
-        "sql": "select 'replace me' as item, 'TODO(author)' as why"
+        "sql": "select record,reason,owner from attention order by reason,record"
+      }
+    ]
+  },
+  {
+    "name": "advocate-load",
+    "title": "Advocate workload and permissions",
+    "sections": [
+      {
+        "title": "Workload",
+        "sql": "select name,company,status,load,capacity,last_completed,last_activity from advocate_load order by name"
+      },
+      {
+        "title": "Permissions",
+        "sql": "select a.name,p.kind,p.decision,p.valid_until,p.restrictions from current_permissions p join advocates a on a.id=p.advocate_id order by a.name,p.kind"
+      }
+    ]
+  },
+  {
+    "name": "compliance",
+    "title": "Privacy and record checks",
+    "subtitle": "Record checks for a human review. These are not a legal compliance certificate.",
+    "sections": [
+      {
+        "title": "Findings",
+        "sql": "select record,rule,finding,owner from compliance_findings order by rule,record"
+      },
+      {
+        "title": "Story clearance",
+        "sql": "select title,name,company,status,usable,valid_until from story_library order by title"
       }
     ]
   }
